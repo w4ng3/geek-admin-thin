@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-admin
+  namespace: test
+  labels:
+    app: social-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: social-admin
+  template:
+    metadata:
+      labels:
+        app: social-admin
+    spec:
+      imagePullSecrets: 
+        - name: regsecret
+      containers:
+      - name: social-admin
+        image: __IMAGE__
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service      
+metadata:
+  name: social-admin-svc
+  namespace: test
+spec:
+  selector:         #通过下面标签(label)来选择Pod
+    app: social-admin
+  ports:
+  - name: http
+    targetPort: 80
+    port: 80
