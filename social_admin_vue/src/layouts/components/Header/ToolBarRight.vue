@@ -4,7 +4,7 @@
       <AssemblySize id="assemblySize" />
       <!-- <Language id="language" /> -->
       <!-- <SearchMenu id="searchMenu" /> -->
-      <!-- <ThemeSetting id="themeSetting" /> -->
+      <ThemeSetting id="themeSetting" />
       <Message id="message" />
       <Fullscreen id="fullscreen" />
     </div>
@@ -19,7 +19,7 @@ import { useAppStoreWithOut } from '@/store/modules/app'
 import AssemblySize from './components/AssemblySize.vue'
 // import Language from "./components/Language.vue";
 // import SearchMenu from "./components/SearchMenu.vue";
-// import ThemeSetting from './components/ThemeSetting.vue'
+import ThemeSetting from './components/ThemeSetting.vue'
 import Message from './components/Message.vue'
 import Fullscreen from './components/Fullscreen.vue'
 import Avatar from './components/Avatar.vue'

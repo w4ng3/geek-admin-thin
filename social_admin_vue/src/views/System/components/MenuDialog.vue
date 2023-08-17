@@ -63,7 +63,7 @@
         <el-form-item v-if="dialogProps.row!.openType === 'URL' && dialogProps.row!.type === 'MENU'" label="链接地址" prop="url">
           <el-input v-model="dialogProps.row!.url" placeholder="请填写链接的URL地址" clearable></el-input>
         </el-form-item>
-        <el-form-item v-if="dialogProps.row!.type === 'BUTTON'" label="授权标识" prop="auth">
+        <el-form-item v-if="dialogProps.row!.type !== 'MENU_DIR'" label="授权标识" prop="auth">
           <el-input
             v-model="dialogProps.row!.auth"
             placeholder="授权标识（多个用逗号分隔，如：sys:menu:list,sys:menu:save）"
@@ -196,8 +196,6 @@ const handleSubmit = () => {
         dialogProps.value.row.path = ''
         dialogProps.value.row.icon = ''
         dialogProps.value.row.openType = ''
-      } else {
-        dialogProps.value.row.auth = ''
       }
       if (dialogProps.value.row!.type !== 'MENU') {
         dialogProps.value.row.openType = ''
