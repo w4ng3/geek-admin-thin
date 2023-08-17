@@ -14,7 +14,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.authentication.DisabledException;
 /**
  * 认证服务实现
  *
@@ -41,6 +41,8 @@ public class AuthServiceImpl implements AuthService {
             // 用户认证
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(params.getUsername(), params.getPassword()));
+        } catch (DisabledException e) {
+            throw new ServerException("该账号已被禁用");
         } catch (BadCredentialsException e) {
             throw new ServerException("用户名或密码错误");
         }

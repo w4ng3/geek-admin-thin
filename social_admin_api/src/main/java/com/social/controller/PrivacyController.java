@@ -32,14 +32,14 @@ public class PrivacyController {
 
     @PostMapping("info")
     @ApiOperation("获取隐私协议信息")
-    @PreAuthorize("hasAuthority('sys:protocolview:list')")
+    @PreAuthorize("hasAuthority('sys:protocol:list')")
     public Result<Privacy> getPrivacyInfo(@RequestBody @Valid PrivacyVO privacyVO) {
         return Result.ok(privacyService.getPrivacyByType(privacyVO));
     }
 
     @PostMapping("edit")
     @ApiOperation("修改隐私协议信息")
-    @PreAuthorize("hasAuthority('sys:protocolview:edit')")
+    @PreAuthorize("hasAuthority('sys:protocol:edit')")
     public Result editPrivacyInfo(@RequestBody @Valid PrivacyVO privacyVO) {
         privacyService.update(privacyVO);
         return Result.ok();

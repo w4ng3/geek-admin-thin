@@ -1,14 +1,6 @@
 package com.social.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.social.serializer.MenuSerializer;
 import io.swagger.annotations.ApiModel;
@@ -16,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-
+import java.time.LocalDateTime;
 /**
  * <p>
  *
@@ -100,4 +92,27 @@ public class SysMenu {
     @ApiModelProperty("更新时间")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    @Override
+    public String toString() {
+        return "SysMenu{" +
+                "pkId=" + pkId +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", path='" + path + '\'' +
+                ", component='" + component + '\'' +
+                ", type='" + type + '\'' +
+                ", openType='" + openType + '\'' +
+                ", url='" + url + '\'' +
+                ", icon='" + icon + '\'' +
+                ", auth='" + auth + '\'' +
+                ", keepalive=" + keepalive +
+                ", sort=" + sort +
+                ", hide=" + hide +
+                ", deleteFlag=" + deleteFlag +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
