@@ -17,7 +17,7 @@ const currentLang = computed(() => localeStore.getCurrentLocale)
 
 const setLang = (lang: LocaleType) => {
   if (lang === unref(currentLang).lang) return
-  // 需要重新加载页面让整个语言多初始化
+  // 需要重新加载页面让整个语言都初始化
   window.location.reload()
   localeStore.setCurrentLocale({
     lang

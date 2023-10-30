@@ -60,18 +60,10 @@ auth:
 aliyun:
   oss:
     # oss对外服务的访问域名
-    endpoint: oss-cn-hangzhou.aliyuncs.com
+    endpoint: '*********'
     # 访问身份验证中用到用户标识
-    accessKeyId: LTAI5tJA9KVPLbCMbkwhsWuK
+    accessKeyId: '*********'
     # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-    accessKeySecret: iPKw8Ddc9Tkvra7Mq8zoRjeC3mzJ3z
+    accessKeySecret: '*********'
     # oss的存储空间
-    bucketName: ycshang123
-#    # oss对外服务的访问域名
-#    endpoint: oss-cn-hangzhou.aliyuncs.com
-#    # 访问身份验证中用到用户标识
-#    accessKeyId: LTAI5tFoqV9USEnqtV1uxKhN
-#    # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-#    accessKeySecret: 9dMhgTOSI862xhcIv7Zj7sNeLvcsOZ
-#    # oss的存储空间
-#    bucketName: tainuanxin
+    bucketName: '*********'

@@ -26,7 +26,7 @@
             show-checkbox
             default-expand-all
             node-key="pkId"
-            :check-strictly="false"
+            :check-strictly="treeStrictly"
           />
         </el-form-item>
       </el-form>
@@ -70,11 +70,14 @@ const dialogProps = ref<DialogProps>({
 })
 
 // 接收父组件传过来的参数
+const treeStrictly = ref(true)
 const acceptParams = (params: DialogProps): void => {
   params.row = { ...dialogProps.value.row, ...params.row }
-  console.log(params.row)
   dialogProps.value = { ...dialogProps.value, ...params }
   dialogVisible.value = true
+  setTimeout(() => {
+    treeStrictly.value = false
+  }, 200)
 }
 
 defineExpose({
@@ -132,6 +135,7 @@ const cancelDialog = (isClean?: boolean) => {
     dialogProps.value.row = {}
     ruleFormRef.value!.resetFields()
   }
+  treeStrictly.value = true
 }
 
 const treeNodeClass = (_data: any, node: Node) => {
