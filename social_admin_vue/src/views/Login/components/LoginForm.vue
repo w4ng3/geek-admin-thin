@@ -74,7 +74,7 @@ const login = (formEl: FormInstance | undefined) => {
       push(permissionStore.homePath)
       ElNotification({
         title: getTimeState(),
-        message: '欢迎登录 Social-Admin',
+        message: '欢迎登录 geeker-admin',
         type: 'success',
         duration: 3000
       })
