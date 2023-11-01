@@ -33,8 +33,8 @@ server:
   servlet:
     context-path: /social-admin-api
 
-#logging:
-#  config: classpath:log/logback-spring.xml
+logging:
+  config: classpath:log/logback-spring.xml
 
 knife4j:
   enable: true  #开启增强功能
@@ -60,10 +60,10 @@ auth:
 aliyun:
   oss:
     # oss对外服务的访问域名
-    endpoint: '*********'
+    endpoint: oss-cn-hangzhou.aliyuncs.com
     # 访问身份验证中用到用户标识
-    accessKeyId: '*********'
+    accessKeyId: LTAI5tFoq
     # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-    accessKeySecret: '*********'
+    accessKeySecret: 9dMhgTOSI862
     # oss的存储空间
-    bucketName: '*********'
+    bucketName: tnx

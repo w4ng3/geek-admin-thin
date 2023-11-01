@@ -16,31 +16,7 @@ export const staticRouter: RouteRecordRaw[] = [
     name: 'layout',
     // component: () => import('@/layouts/index.vue'),
     component: () => import('@/layouts/indexAsync.vue'),
-    children: [
-      // {
-      //   path: '/user/user_manage/friends/:id&:phone?',
-      //   name: 'UserFriends',
-      //   component: () => import('@/views/User/FriendsTable.vue'),
-      //   children: [],
-      //   beforeEnter: (to, from, next) => {
-      //     if (to.params.phone) {
-      //       to.meta.title = '好友列表#' + to.params.phone + '#'
-      //     } else {
-      //       to.meta.title = '好友列表'
-      //     }
-      //     next()
-      //   },
-      //   meta: {
-      //     icon: 'Menu',
-      //     activeMenu: '',
-      //     isLink: '',
-      //     isHide: true,
-      //     isFull: false,
-      //     isAffix: false,
-      //     isKeepAlive: true
-      //   }
-      // }
-    ]
+    children: []
   }
 ]
 

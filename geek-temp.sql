@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 30/10/2023 18:13:38
+ Date: 01/11/2023 11:39:59
 */
 
 SET NAMES utf8mb4;
@@ -88,13 +88,13 @@ CREATE TABLE `sys_menu` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `hide` tinyint NOT NULL DEFAULT '1' COMMENT '是否隐藏（0:true,1fasle）',
   PRIMARY KEY (`pk_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (1, 0, 'system', '系统管理', '/system', '', 'MENU_DIR', '', '', 'HomeFilled', '', 0, 0, 0, '2023-07-11 15:36:12', '2023-07-26 15:29:55', 1);
+INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (1, 0, 'system', '系统管理', '/system', '', 'MENU_DIR', '', '', 'HomeFilled', '', 0, 1, 0, '2023-07-11 15:36:12', '2023-11-01 11:24:33', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (2, 1, 'Manager', '管理员管理', '/system/manager', '/System/Manager', 'MENU', 'TAB', '', 'HomeFilled', 'sys:manager:list', 0, 1, 0, '2023-07-11 15:37:01', '2023-07-27 09:23:53', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (3, 1, 'Role', '角色管理', '/system/role', '/System/Role', 'MENU', 'TAB', '', 'BellFilled', 'sys:role:list', 0, 2, 0, '2023-07-11 15:37:01', '2023-07-27 09:35:51', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (4, 1, 'Menu', '菜单管理', '/system/menu', '/System/Menu', 'MENU', 'TAB', '', 'HomeFilled', '', 0, 3, 0, '2023-07-11 15:37:01', '2023-07-26 15:29:58', 1);
@@ -106,9 +106,9 @@ INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `componen
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (13, 3, 'add', '新增', '', '', 'BUTTON', '', '', '', 'sys:role:add', 1, 1, 0, '2023-07-11 15:37:19', '2023-07-26 15:30:01', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (14, 3, 'edit', '编辑', '', '', 'BUTTON', '', '', '', 'sys:role:edit', 1, 2, 0, '2023-07-11 15:37:19', '2023-07-26 15:30:01', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (15, 3, 'remove', '删除', '', '', 'BUTTON', '', '', '', 'sys:role:remove', 1, 3, 0, '2023-07-11 15:37:19', '2023-07-26 15:30:02', 1);
-INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (38, 0, 'platform', '平台管理', '/platform', '', 'MENU_DIR', '', '', 'Operation', '', 0, 0, 0, '2023-07-11 15:37:19', '2023-07-26 15:30:02', 1);
+INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (38, 0, 'platform', '平台管理', '/platform', '', 'MENU_DIR', '', '', 'Operation', '', 0, 2, 0, '2023-07-11 15:37:19', '2023-11-01 11:24:38', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (39, 38, 'ProtocolView', '协议管理', '/platform/protocol', '/Platform/ProtocolView', 'MENU', 'TAB', '', 'DocumentCopy', 'sys:protocol:list', 0, 1, 0, '2023-07-11 15:37:19', '2023-10-30 17:02:14', 1);
-INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (42, 0, 'user', '用户管理', '/user', '', 'MENU_DIR', '', '', 'UserFilled', '', 1, 2, 0, '2023-07-11 15:37:19', '2023-07-26 15:30:04', 1);
+INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (42, 0, 'user', '用户管理', '/user', '', 'MENU_DIR', '', '', 'UserFilled', '', 1, 3, 0, '2023-07-11 15:37:19', '2023-11-01 11:24:43', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (43, 42, 'UserManage', '用户管理', '/user/user_manage', '/User/UserManage', 'MENU', 'TAB', '', 'User', 'sys:user:list', 0, 1, 0, '2023-07-11 15:37:19', '2023-07-27 09:29:53', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (49, 38, 'Version', '版本管理', '/platform/version', '/Platform/Version', 'MENU', 'TAB', '', 'Flag', 'platform:version:list', 0, 4, 0, '2023-07-15 14:13:02', '2023-07-27 09:06:29', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (67, 43, 'export', '导出', '', '', 'BUTTON', '', '', '', 'sys:user:export', 1, 0, 0, '2023-07-26 16:55:32', '2023-07-26 16:55:32', 1);
@@ -122,6 +122,8 @@ INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `componen
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (80, 49, 'edit', '编辑', '', '', 'BUTTON', '', '', '', 'platform:version:edit', 1, 2, 0, '2023-07-26 17:12:24', '2023-07-26 17:12:24', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (81, 49, 'remove', '删除', '', '', 'BUTTON', '', '', '', 'platform:version:remove', 1, 3, 0, '2023-07-26 17:12:48', '2023-07-26 17:12:48', 1);
 INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (107, 39, 'save', '保存', '', '', 'BUTTON', '', '', '', 'sys:protocol:edit', 1, 1, 0, '2023-10-30 17:03:09', '2023-10-30 17:03:09', 1);
+INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (108, 0, 'home', '首页', '/home', '/Home/Home', 'MENU', 'TAB', '', 'Menu', 'none', 1, 0, 1, '2023-11-01 11:24:13', '2023-11-01 11:26:53', 0);
+INSERT INTO `sys_menu` (`pk_id`, `parent_id`, `name`, `title`, `path`, `component`, `type`, `open_type`, `url`, `icon`, `auth`, `keepalive`, `sort`, `delete_flag`, `create_time`, `update_time`, `hide`) VALUES (109, 0, 'home', '首页', '/home', '/Home/Home', 'MENU', 'TAB', '', 'HomeFilled', 'none', 1, 0, 0, '2023-11-01 11:38:01', '2023-11-01 11:38:36', 1);
 COMMIT;
 
 -- ----------------------------
