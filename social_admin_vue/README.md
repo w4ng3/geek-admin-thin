@@ -33,7 +33,7 @@ Chrome Edge Firefox Safari
 
 安装依赖之前确保项目处在 git 环境（有.git）
 
-安装依赖 `npm/pnpm install`
+安装依赖 `npm install` 或 `pnpm install`
 
 本地运行 `npm/pnpm run dev`
 

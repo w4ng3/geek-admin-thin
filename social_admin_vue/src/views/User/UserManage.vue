@@ -10,6 +10,7 @@
       :row-style="{ height: '0' }"
       :cell-style="{ padding: '0px' }"
       :searchCol="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4 }"
+      rowKey="pkId"
     >
       >
       <!-- 表格 header 按钮 -->
@@ -30,7 +31,6 @@ import { ref, reactive } from 'vue'
 import { ColumnProps } from '@/components/ProTable/interface'
 import ProTable from '@/components/ProTable/index.vue'
 import UserDialog from './components/UserDialog.vue'
-// import UserFriendDialog from './components/UserFriendDialog.vue'
 import { Download } from '@element-plus/icons-vue'
 import { View } from '@element-plus/icons-vue'
 import { UserApi } from '@/api/modules/user'
@@ -59,7 +59,7 @@ const getTableList = (params: any) => {
 
 // 表格配置项
 const columns: ColumnProps<UserType>[] = [
-  // { type: 'selection', fixed: 'left', width: 60 },
+  { type: 'selection', fixed: 'left', width: 60 },
   {
     prop: 'avatar',
     label: '头像',
@@ -127,6 +127,14 @@ const columns: ColumnProps<UserType>[] = [
     prop: 'endTime',
     label: '会员到期时间',
     width: 200
+  },
+  {
+    prop: 'maintenance',
+    label: '日期',
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetime', format: 'YYYY-MM-DD', valueFormat: 'YYYY-MM-DD', placeholder: '请选择维修日期' }
+    }
   },
   {
     prop: 'createTime',

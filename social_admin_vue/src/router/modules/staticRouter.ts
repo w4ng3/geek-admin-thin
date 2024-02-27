@@ -58,14 +58,5 @@ export const errorRouter = [
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/Error/404.vue')
-  },
-  {
-    path: '/share-note',
-    component: () => import('@/views/Error/ShareNote.vue'),
-    meta: {
-      hidden: true,
-      title: '笔记',
-      noTagsView: true
-    }
   }
 ]

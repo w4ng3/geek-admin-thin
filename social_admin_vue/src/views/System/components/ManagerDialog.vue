@@ -11,7 +11,7 @@
         :hide-required-asterisk="dialogProps.isView"
       >
         <el-form-item v-if="dialogProps.title !== '重置'" label="用户名" prop="username">
-          <el-input v-model="dialogProps.row!.username" placeholder="请填写用户名（5-20字）" clearable></el-input>
+          <el-input v-model="dialogProps.row!.username" placeholder="请填写用户名（2-20字）" clearable></el-input>
         </el-form-item>
         <el-form-item v-if="dialogProps.title !== '重置'" label="姓名" prop="realName">
           <el-input v-model="dialogProps.row!.realName" placeholder="请填写姓名（2-10字）" clearable></el-input>
@@ -104,7 +104,7 @@ await getFormRoleList()
 const rules = reactive({
   username: [
     { required: true, message: '用户名不能为空', trigger: 'blur' },
-    { min: 5, max: 20, message: '字数为5-20个字' }
+    { min: 2, max: 20, message: '字数为2-20个字' }
   ],
   realName: [
     { required: true, message: '姓名不能为空', trigger: 'blur' },

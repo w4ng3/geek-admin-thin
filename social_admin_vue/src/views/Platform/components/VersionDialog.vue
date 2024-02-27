@@ -12,8 +12,9 @@
       >
         <el-form-item label="平台" prop="platform">
           <el-radio-group v-model="dialogProps.row!.platform">
-            <el-radio label="ios" border>ios</el-radio>
-            <el-radio label="安卓" border>安卓</el-radio>
+            <el-radio label="ios">ios</el-radio>
+            <el-radio label="安卓">安卓</el-radio>
+            <el-radio label="mp">微信小程序</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="简介" prop="summary">
