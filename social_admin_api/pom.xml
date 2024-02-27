@@ -26,6 +26,7 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <druid.version>1.2.16</druid.version>
         <captcha.version>1.6.2</captcha.version>
+        <easytrans.version>2.1.16</easytrans.version>
     </properties>
 
     <dependencies>
@@ -149,6 +150,17 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>3.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fhs-opensource</groupId>
+            <artifactId>easy-trans-spring-boot-starter</artifactId>
+            <version>${easytrans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fhs-opensource</groupId>
+            <artifactId>easy-trans-mybatis-plus-extend</artifactId>
+            <version>${easytrans.version}</version>
         </dependency>
 
 

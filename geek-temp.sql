@@ -16,6 +16,60 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `sys_dict`
+--
+
+DROP TABLE IF EXISTS `sys_dict`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_dict` (
+  `pk_id` int NOT NULL AUTO_INCREMENT COMMENT '主键唯一字段',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `number` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '编号',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '描述',
+  `delete_flag` tinyint NOT NULL DEFAULT '0' COMMENT '0:未删除  1:已删除',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`pk_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_dict`
+--
+
+/*!40000 ALTER TABLE `sys_dict` DISABLE KEYS */;
+INSERT INTO `sys_dict` VALUES (39,'性别','gender','性别枚举',0,'2024-02-27 15:00:47','2024-02-27 15:02:24');
+/*!40000 ALTER TABLE `sys_dict` ENABLE KEYS */;
+
+--
+-- Table structure for table `sys_dict_config`
+--
+
+DROP TABLE IF EXISTS `sys_dict_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_dict_config` (
+  `pk_id` int NOT NULL AUTO_INCREMENT COMMENT '主键唯一字段',
+  `dict_number` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典编号',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '数据值',
+  `delete_flag` tinyint NOT NULL DEFAULT '0' COMMENT '0:未删除  1:已删除',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`pk_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_dict_config`
+--
+
+/*!40000 ALTER TABLE `sys_dict_config` DISABLE KEYS */;
+INSERT INTO `sys_dict_config` VALUES (99,'gender','男','1',0,'2024-02-27 15:03:31','2024-02-27 15:03:31'),(100,'gender','女','0',0,'2024-02-27 15:03:39','2024-02-27 15:03:53'),(101,'gender','MTF','3',0,'2024-02-27 15:04:09','2024-02-27 15:04:09'),(102,'gender','FTM','4',0,'2024-02-27 15:04:17','2024-02-27 15:04:17'),(104,'gender','Queer','5',0,'2024-02-27 15:05:11','2024-02-27 15:05:11');
+/*!40000 ALTER TABLE `sys_dict_config` ENABLE KEYS */;
+
+--
 -- Table structure for table `sys_manager`
 --
 
@@ -260,4 +314,4 @@ INSERT INTO `t_user` VALUES (1,'17314433312','王東','a7ba89d5e5761b8ca07fcfb0c
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-27 16:52:03
+-- Dump completed on 2024-02-27 23:08:41
