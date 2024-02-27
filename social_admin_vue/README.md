@@ -41,6 +41,11 @@ Chrome Edge Firefox Safari
 
 命令详情看 `package.json`
 
+## 登录账号
+
+- 超级管理员，账号 admin \ 密码 admin
+- 测试账号，账号 dong \ 密码 Dong@1234
+
 ## 目录结构
 
 ```

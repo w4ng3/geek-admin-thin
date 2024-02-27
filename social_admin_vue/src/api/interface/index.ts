@@ -121,3 +121,21 @@ export namespace Upload {
     fileUrl: string
   }
 }
+
+// * 字典
+export interface Dict {
+  id: number
+  title: string
+  updateTime: string
+  value: number
+}
+
+/** 字典设置 */
+export interface DictConfigRes {
+  createTime: string
+  dictNumber: string
+  id: number
+  title: string
+  updateTime: string
+  value: number
+}
