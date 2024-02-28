@@ -1,78 +1,102 @@
 package com.ssy.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ssy.serializer.MenuSerializer;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
+
 /**
  * <p>
- *
+ * 菜单管理
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Getter
 @Setter
 @TableName("sys_menu")
-@ApiModel(value = "Menu对象", description = "")
 public class SysMenu {
 
-    @ApiModelProperty("自增主键")
+    /**
+     * id
+     */
     @TableId(value = "pk_id", type = IdType.AUTO)
     private Integer pkId;
 
-    @ApiModelProperty("父级id")
+    /**
+     * 上级ID，一级菜单为0
+     */
     @TableField("parent_id")
     private Integer parentId;
 
-    @ApiModelProperty("名称")
+    /**
+     * 菜单名称
+     */
     @TableField("name")
     private String name;
 
-    @ApiModelProperty("标题")
+    /**
+     * 菜单标题
+     */
     @TableField("title")
     private String title;
-
-    @ApiModelProperty("路径")
+    /**
+     * 菜单路径
+     */
     @TableField("path")
     private String path;
 
-    @ApiModelProperty("组件路径")
+    /**
+     * 组件路径
+     */
     @TableField("component")
     private String component;
 
-    @ApiModelProperty("菜单类型 menu: 菜单 button: 按钮")
+    /**
+     * 菜单类型 menu: 菜单 button: 按钮
+     */
     @TableField("type")
     private String type;
 
-    @ApiModelProperty("打开类型 tab: 选项卡 url: 外链")
+    /**
+     * 打开类型 tab: 选项卡 url: 外链
+     */
     @TableField("open_type")
     private String openType;
 
-    @ApiModelProperty("外链地址")
+    /**
+     * 外链地址
+     */
     @TableField("url")
     private String url;
 
-    @ApiModelProperty("菜单图标")
+    /**
+     * 菜单图标
+     */
     @TableField("icon")
     private String icon;
 
-    @ApiModelProperty("授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)")
+    /**
+     * 授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)
+     */
     @TableField("auth")
     private String auth;
 
-    @ApiModelProperty("是否缓存 0:true 1:false")
-    @TableField("keepalive")
+    /**
+     * 是否缓存 0:false 1:true
+     */
+    @TableField("keep_alive")
     @JsonSerialize(using = MenuSerializer.class)
-    private Integer keepalive;
+    private Integer keepAlive;
 
-    @ApiModelProperty("排序")
+    /**
+     * 排序
+     */
     @TableField("sort")
     private Integer sort;
 
@@ -80,39 +104,23 @@ public class SysMenu {
     @JsonSerialize(using = MenuSerializer.class)
     private Integer hide;
 
-    @ApiModelProperty("逻辑删除(0-未删除，1-删除)")
-    @TableField("delete_flag")
+    /**
+     * 删除标识  0：正常   1：已删除
+     */
+    @TableField(value = "delete_flag", fill = FieldFill.INSERT)
     @TableLogic
     private Integer deleteFlag;
 
-    @ApiModelProperty("创建时间")
+    /**
+     * 创建时间
+     */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+
+    /**
+     * 更新时间
+     */
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    @Override
-    public String toString() {
-        return "SysMenu{" +
-                "pkId=" + pkId +
-                ", parentId=" + parentId +
-                ", name='" + name + '\'' +
-                ", title='" + title + '\'' +
-                ", path='" + path + '\'' +
-                ", component='" + component + '\'' +
-                ", type='" + type + '\'' +
-                ", openType='" + openType + '\'' +
-                ", url='" + url + '\'' +
-                ", icon='" + icon + '\'' +
-                ", auth='" + auth + '\'' +
-                ", keepalive=" + keepalive +
-                ", sort=" + sort +
-                ", hide=" + hide +
-                ", deleteFlag=" + deleteFlag +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
-    }
 }

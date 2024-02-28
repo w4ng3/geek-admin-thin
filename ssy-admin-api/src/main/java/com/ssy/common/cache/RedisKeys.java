@@ -1,7 +1,7 @@
 package com.ssy.common.cache;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 public class RedisKeys {
 

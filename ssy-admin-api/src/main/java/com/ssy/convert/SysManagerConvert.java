@@ -1,6 +1,5 @@
 package com.ssy.convert;
 
-
 import com.ssy.entity.SysManager;
 import com.ssy.security.user.ManagerDetail;
 import com.ssy.vo.SysManagerVO;
@@ -12,11 +11,11 @@ import java.util.List;
 
 @Mapper
 public interface SysManagerConvert {
-	SysManagerConvert INSTANCE = Mappers.getMapper(SysManagerConvert.class);
+    SysManagerConvert INSTANCE = Mappers.getMapper(SysManagerConvert.class);
 
-	SysManager convert(SysManagerVO vo);
+    SysManager convert(SysManagerVO vo);
 
-	ManagerDetail convertDetail(SysManager entity);
+    ManagerDetail convertDetail(SysManager entity);
 
-	List<SysManagerVO> convertList(List<SysManager> list);
+    List<SysManagerVO> convertList(List<SysManager> list);
 }

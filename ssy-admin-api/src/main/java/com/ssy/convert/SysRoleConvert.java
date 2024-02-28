@@ -9,12 +9,12 @@ import java.util.List;
 
 @Mapper
 public interface SysRoleConvert {
-	SysRoleConvert INSTANCE = Mappers.getMapper(SysRoleConvert.class);
+    SysRoleConvert INSTANCE = Mappers.getMapper(SysRoleConvert.class);
 
-	SysRoleVO convert(SysRole entity);
+    SysRoleVO convert(SysRole entity);
 
-	SysRole convert(SysRoleVO vo);
-
-	List<SysRoleVO> convertList(List<SysRole> list);
+    SysRole convert(SysRoleVO vo);
+    
+    List<SysRoleVO> convertList(List<SysRole> list);
 
 }

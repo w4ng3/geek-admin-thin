@@ -6,18 +6,18 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
- * @author w
+ * @author ycshang
  */
 @SpringBootApplication
-public class SSYAdminApiApplication extends SpringBootServletInitializer {
+public class SsyAdminApiApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(SSYAdminApiApplication.class, args);
+        SpringApplication.run(SsyAdminApiApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SSYAdminApiApplication.class);
+        return application.sources(SsyAdminApiApplication.class);
     }
 
 }

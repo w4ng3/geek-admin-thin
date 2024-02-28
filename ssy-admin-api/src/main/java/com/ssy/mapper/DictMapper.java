@@ -8,14 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * <p>
- * Mapper 接口
- * </p>
- *
- * @author ycshang
- * @since 2023-11-13
- */
 public interface DictMapper extends BaseMapper<Dict> {
 
     /**
@@ -26,5 +18,4 @@ public interface DictMapper extends BaseMapper<Dict> {
      * @return
      */
     List<Dict> getPage(Page<Dict> page, @Param("query") DictQuery query);
-
 }

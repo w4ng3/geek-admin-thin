@@ -8,7 +8,6 @@ import com.ssy.common.constant.Constant;
 import com.ssy.common.exception.ServerException;
 import com.ssy.convert.SysMenuConvert;
 import com.ssy.entity.SysMenu;
-import com.ssy.enums.DeleteFlagEnum;
 import com.ssy.enums.MenuTypeEnum;
 import com.ssy.enums.SuperAdminEnum;
 import com.ssy.mapper.SysMenuMapper;
@@ -26,17 +25,30 @@ import java.util.*;
 
 /**
  * <p>
- * 服务实现类
+ * 菜单管理 服务实现类
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Service
 @AllArgsConstructor
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
     private final SysRoleMenuService sysRoleMenuService;
+
+    @Override
+    public List<SysMenuVO> getManagerMenuList(ManagerDetail manager,String type) {
+        List<SysMenu> menuList;
+        // 系统管理员，拥有最高权限
+        if (manager.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
+            menuList = baseMapper.getMenuList(type,false);
+        } else {
+            menuList = baseMapper.getManagerMenuList(manager.getPkId(), type,false);
+        }
+
+        return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
+    }
 
     @Override
     public Set<String> getManagerAuthority(ManagerDetail manager) {
@@ -61,76 +73,16 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public List<SysMenuVO> getManagerMenuList(ManagerDetail manager, String type) {
-        List<SysMenu> menuList;
-        // 系统管理员，拥有最高权限
-        if (manager.getSuperAdmin().equals(SuperAdminEnum.YES.getValue())) {
-            menuList = baseMapper.getMenuList(type, false);
-        } else {
-            menuList = baseMapper.getManagerMenuList(manager.getPkId(), type, false);
-        }
-
-        return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList));
-    }
-
-    @Override
     public List<SysMenuVO> getMenuList(SysMenuQuery query) {
         LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper();
-        List<SysMenu> menus = new ArrayList<>();
-        List<SysMenu> result = new ArrayList<>();
-        if (StringUtils.isNotBlank(query.getTitle())) {
-            wrapper.like(SysMenu::getTitle, query.getTitle());
+        if(StringUtils.isNotBlank(query.getTitle())){
+            wrapper.like(SysMenu::getTitle,query.getTitle());
         }
         wrapper.orderByAsc(SysMenu::getSort);
-        wrapper.eq(SysMenu::getDeleteFlag, DeleteFlagEnum.NOT_DELETE.getValue());
         List<SysMenu> menuList = baseMapper.selectList(wrapper);
-
-        if (StringUtils.isNotBlank(query.getTitle())) {
-            menus = baseMapper.selectList(new LambdaQueryWrapper<SysMenu>().eq(SysMenu::getDeleteFlag, DeleteFlagEnum.NOT_DELETE.getValue()));
-
-            if (menuList.size() > 0) {
-                for (SysMenu menu : menuList) {
-                    result.add(menu);
-//                    找子节点
-                    result.addAll(getChildList(menu, menus));
-//                    父级节点
-                    result.addAll(getParentList(menu, menus));
-
-
-                }
-            }
-            Integer rootNode = result.size() > 0 ? result.stream().min(Comparator.comparing(SysMenu::getParentId)).get().getParentId() : Constant.ROOT;
-            return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(result), rootNode);
-
-        }
-
         return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList), Constant.ROOT);
     }
 
-    @Override
-    public List<SysMenu> getFormMenuList() {
-        LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(SysMenu::getType, MenuTypeEnum.MENU.name(), MenuTypeEnum.MENU_DIR.name());
-        List<SysMenuVO> treeMenu = TreeUtils.build(SysMenuConvert.INSTANCE.convertList(baseMapper.selectList(wrapper)), Constant.ROOT);
-        List<SysMenu> menuList = new ArrayList<>();
-        SysMenu sysMenu = new SysMenu();
-        sysMenu.setPkId(0);
-        sysMenu.setTitle("根节点");
-        menuList.add(sysMenu);
-        for (SysMenuVO menu : treeMenu) {
-            menuList.add(SysMenuConvert.INSTANCE.convert(menu));
-            for (int i = 0; i < menu.getChildren().size(); i++) {
-                SysMenuVO item = menu.getChildren().get(i);
-                if (i < menu.getChildren().size() - 1) {
-                    item.setTitle("      " + item.getTitle());
-                } else {
-                    item.setTitle("      " + item.getTitle());
-                }
-                menuList.add(SysMenuConvert.INSTANCE.convert(item));
-            }
-        }
-        return menuList;
-    }
 
     @Override
     public SysMenuVO infoById(Integer id) {
@@ -138,18 +90,32 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         SysMenuVO vo = SysMenuConvert.INSTANCE.convert(entity);
 
         // 获取上级菜单名称
-        if (!Constant.ROOT.equals(entity.getPkId())) {
-            SysMenu parentEntity = baseMapper.selectById(entity.getPkId());
+        if (!Constant.ROOT.equals(entity.getParentId())) {
+            SysMenu parentEntity = baseMapper.selectById(entity.getParentId());
             vo.setParentName(parentEntity.getName());
         }
         return vo;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(SysMenuVO vo) {
         SysMenu entity = SysMenuConvert.INSTANCE.convert(vo);
+//        SysMenu sysMenu = new SysMenu();
+//        sysMenu.setPid(vo.getPid());
+//        sysMenu.setType(vo.getType());
+//        sysMenu.setName(vo.getName());
+//        sysMenu.setTitle(vo.getTitle());
+//        if(!sysMenu.getType().equals(MenuTypeEnum.BUTTON.name())){
+//            sysMenu.setPath(vo.getPath());
+//            sysMenu.setIcon(vo.getIcon());
+//            if(sysMenu.getType().equals(MenuTypeEnum.MENU.name())){
+//                sysMenu.setOpenType(vo.getOpenType());
+//                if(sysMenu.getOpenType())
+//            }
+//        }
+        // 保存菜单
         baseMapper.insert(entity);
-
     }
 
     @Override
@@ -179,49 +145,42 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
+    public List<SysMenu> getFormMenuList() {
+        LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(SysMenu::getType, MenuTypeEnum.MENU.name(), MenuTypeEnum.MENU_DIR.name());
+        List<SysMenuVO> treeMenu = TreeUtils.build(SysMenuConvert.INSTANCE.convertList(baseMapper.selectList(wrapper)), Constant.ROOT);
+        List<SysMenu> menuList = new ArrayList<>();
+        SysMenu sysMenu = new SysMenu();
+        sysMenu.setPkId(0);
+        sysMenu.setTitle("根节点");
+        menuList.add(sysMenu);
+        for (SysMenuVO menu : treeMenu) {
+            menuList.add(SysMenuConvert.INSTANCE.convert(menu));
+            for (int i = 0; i < menu.getChildren().size(); i++) {
+                SysMenuVO item = menu.getChildren().get(i);
+                if (i < menu.getChildren().size() - 1){
+                    item.setTitle("      " + item.getTitle());
+                } else {
+                    item.setTitle("      " + item.getTitle());
+                }
+                menuList.add(SysMenuConvert.INSTANCE.convert(item));
+            }
+        }
+        return menuList;
+    }
+
+    @Override
     public List<SysMenuVO> getRoleFormMenuList() {
         LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper();
         // 排除菜单管理 只给开发者配置
-        wrapper.ne(SysMenu::getTitle, "菜单管理");
+        wrapper.ne(SysMenu::getTitle,"菜单管理");
         wrapper.orderByAsc(SysMenu::getSort);
         List<SysMenu> menuList = baseMapper.selectList(wrapper);
         return TreeUtils.build(SysMenuConvert.INSTANCE.convertList(menuList), Constant.ROOT);
     }
 
-    /**
-     * 递归查询子集
-     *
-     * @param menu
-     * @param list
-     * @return
-     */
-    public List<SysMenu> getChildList(SysMenu menu, List<SysMenu> list) {
-        List<SysMenu> menuList = new ArrayList<>();
-        list.forEach(item -> {
-            if (menu.getPkId() == item.getParentId()) {
-                menuList.add(item);
-                menuList.addAll(getChildList(item, list));
-            }
-        });
-        return menuList;
-    }
-
-    /**
-     * 递归查询父级
-     *
-     * @param menu
-     * @param list
-     * @return
-     */
-    public List<SysMenu> getParentList(SysMenu menu, List<SysMenu> list) {
-        List<SysMenu> menuList = new ArrayList<>();
-        list.forEach(item -> {
-            if (menu.getParentId() == item.getPkId()) {
-                menuList.add(item);
-                menuList.addAll(getParentList(item, list));
-            }
-        });
-        System.out.println(menuList);
-        return menuList;
+    @Override
+    public Long getSubMenuCount(Integer pid) {
+        return count(new LambdaQueryWrapper<SysMenu>().eq(SysMenu::getParentId, pid));
     }
 }

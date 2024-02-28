@@ -12,18 +12,17 @@ import java.util.List;
 
 /**
  * <p>
- * Mapper 接口
+ * 用户管理 Mapper 接口
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 public interface SysManagerMapper extends BaseMapper<SysManager> {
 
-	default SysManager getByUsername(String username) {
-		return this.selectOne(new LambdaQueryWrapper<SysManager>().eq(SysManager::getUsername, username));
-	}
+    default SysManager getByUsername(String username){
+        return this.selectOne(new LambdaQueryWrapper<SysManager>().eq(SysManager::getUsername, username));
+    }
 
-	List<SysManagerVO> getManagerPage(Page<SysManagerVO> page, @Param("query") SysManagerQuery query);
-
+    List<SysManagerVO> getManagerPage(Page<SysManagerVO> page, @Param("query") SysManagerQuery query);
 }

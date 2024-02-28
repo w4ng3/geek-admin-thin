@@ -5,9 +5,6 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
-/**
- * @author ycshang
- */
 @Data
 @Schema(description = "字典管理")
 public class DictRequestDTO {

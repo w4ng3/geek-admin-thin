@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Data
 @Schema(description = "分页数据")

@@ -21,7 +21,7 @@ public class TreeNode<T> implements Serializable {
     /**
      * 主键
      */
-    @Schema(description = "pk_id")
+    @Schema(description = "id")
     private Integer pkId;
     /**
      * 上级ID

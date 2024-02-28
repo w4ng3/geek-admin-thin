@@ -1,5 +1,6 @@
 package com.ssy.controller;
 
+
 import com.ssy.common.result.Result;
 import com.ssy.service.CommonService;
 import com.ssy.vo.FileUrlVO;
@@ -9,11 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @Author ycshang
- * @Date 2023/7/12
- * @Description TODO
- */
+
 @Api(tags = "通用模块")
 @RestController
 @RequestMapping("common")

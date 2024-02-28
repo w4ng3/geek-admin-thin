@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    UNAUTHORIZED(401, "登录失效，请重新登录"),
+    UNAUTHORIZED(401, "还未授权，不能访问"),
     FORBIDDEN(403, "没有权限，禁止访问"),
     INTERNAL_SERVER_ERROR(500, "服务器异常，请稍后再试");
 

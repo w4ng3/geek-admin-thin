@@ -11,13 +11,14 @@ import java.util.List;
 
 /**
  * <p>
- * Mapper 接口
+ * 角色管理 Mapper 接口
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
-	List<SysRoleVO> getRolePage(Page<SysRoleVO> page, @Param("query") SysRoleQuery query);
+
+    List<SysRoleVO> getRolePage(Page<SysRoleVO> page, @Param("query") SysRoleQuery query);
 
 }

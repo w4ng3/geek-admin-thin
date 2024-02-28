@@ -5,20 +5,20 @@ import com.ssy.security.cache.TokenStoreCache;
 import com.ssy.security.user.ManagerDetail;
 import com.ssy.security.utils.TokenUtils;
 import com.ssy.service.AuthService;
-import com.ssy.service.SysCaptchaService;
 import com.ssy.vo.SysAccountLoginVO;
 import com.ssy.vo.SysTokenVO;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.security.authentication.DisabledException;
+
 /**
  * 认证服务实现
  *
- * @Author 王子凡
+ * @Author ycshang
  * @Date 2023-05-18 17:31
  */
 @Service
@@ -28,14 +28,8 @@ public class AuthServiceImpl implements AuthService {
     private final TokenStoreCache tokenStoreCache;
     private final AuthenticationManager authenticationManager;
 
-    private final SysCaptchaService sysCaptchaService;
-
     @Override
     public SysTokenVO loginByAccount(SysAccountLoginVO params) {
-//		boolean flag = sysCaptchaService.validate(params.getKey(), params.getCaptcha());
-//		if (!flag) {
-//			throw new ServerException("验证码错误");
-//		}
         Authentication authentication;
         try {
             // 用户认证

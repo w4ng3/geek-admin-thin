@@ -1,53 +1,58 @@
 package com.ssy.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ * 角色菜单关系
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Getter
 @Setter
 @TableName("sys_role_menu")
-@ApiModel(value = "RoleMenu对象", description = "")
 public class SysRoleMenu {
 
-    @ApiModelProperty("自增主键")
+    /**
+     * id
+     */
     @TableId(value = "pk_id", type = IdType.AUTO)
     private Integer pkId;
 
-    @ApiModelProperty("角色id")
+    /**
+     * 角色ID
+     */
     @TableField("role_id")
     private Integer roleId;
 
-    @ApiModelProperty("菜单id")
+    /**
+     * 菜单ID
+     */
     @TableField("menu_id")
     private Integer menuId;
 
-    @ApiModelProperty("逻辑删除(0-未删除，1-删除)")
-    @TableField("delete_flag")
+    /**
+     * 删除标识  0：正常   1：已删除
+     */
+    @TableField(value = "delete_flag", fill = FieldFill.INSERT)
     @TableLogic
     private Integer deleteFlag;
 
-    @ApiModelProperty("创建时间")
+    /**
+     * 创建时间
+     */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    /**
+     * 更新时间
+     */
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }

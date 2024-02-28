@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Component
 public class PermitResource {

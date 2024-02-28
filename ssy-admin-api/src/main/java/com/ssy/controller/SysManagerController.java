@@ -12,8 +12,8 @@ import com.ssy.service.SysManagerService;
 import com.ssy.vo.SysManagerVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,16 +25,16 @@ import java.util.List;
 
 /**
  * <p>
- * 前端控制器
+ * 用户管理 前端控制器
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Api(tags = "管理员管理")
 @AllArgsConstructor
 @RestController
-@RequestMapping("sys/manager")
+@RequestMapping("/sys/manager")
 public class SysManagerController {
 
     private final SysManagerService sysManagerService;
@@ -42,24 +42,17 @@ public class SysManagerController {
     private final PasswordEncoder passwordEncoder;
 
 
-    @PostMapping("getManagerInfo")
-    @ApiOperation("获取管理员信息")
-    public Result<SysManagerVO> getManagerInfo() {
-        ManagerDetail manager = SecurityUser.getManager();
-        return Result.ok(sysManagerService.getManagerInfo(manager));
-    }
 
     @PostMapping("page")
-    @ApiOperation("分页")
-    @PreAuthorize("hasAuthority('sys:manager:list')")
+    @Operation(summary = "分页")
     public Result<PageResult<SysManagerVO>> page(@RequestBody @Valid SysManagerQuery query) {
         PageResult<SysManagerVO> page = sysManagerService.page(query);
+
         return Result.ok(page);
     }
 
     @PostMapping("add")
-    @ApiOperation("保存")
-    @PreAuthorize("hasAuthority('sys:manager:add')")
+    @Operation(summary = "保存")
     public Result<String> save(@RequestBody @Valid SysManagerVO vo) {
         // 新增密码不能为空
         if (StrUtil.isBlank(vo.getPassword())) {
@@ -74,8 +67,7 @@ public class SysManagerController {
     }
 
     @PostMapping("edit")
-    @ApiOperation("修改")
-    @PreAuthorize("hasAuthority('sys:manager:edit') or hasAuthority('sys:manager:reset-psw')")
+    @Operation(summary = "修改")
     public Result<String> update(@RequestBody @Valid SysManagerVO vo) {
         // 如果密码不为空，则进行加密处理
         if (StrUtil.isBlank(vo.getPassword())) {
@@ -90,8 +82,7 @@ public class SysManagerController {
     }
 
     @PostMapping("remove")
-    @ApiOperation("删除")
-    @PreAuthorize("hasAuthority('sys:manager:remove')")
+    @Operation(summary = "删除")
     public Result<String> delete(@RequestBody List<Integer> idList) {
         Integer managerId = SecurityUser.getManagerId();
         if (idList.contains(managerId)) {
@@ -103,6 +94,13 @@ public class SysManagerController {
         return Result.ok();
     }
 
+    @PostMapping("getManagerInfo")
+    @ApiOperation("获取管理员信息")
+    public Result<SysManagerVO> getManagerInfo() {
+        ManagerDetail manager = SecurityUser.getManager();
+        return Result.ok(sysManagerService.getManagerInfo(manager));
+    }
+
     @PostMapping("changePassword")
     @ApiOperation("修改密码")
     public Result<String> editPassword(@RequestBody @Valid ChangePasswordQuery query) {
@@ -111,7 +109,6 @@ public class SysManagerController {
             throw new ServerException("管理员不存在");
         }
         query.setPkId(manager.getPkId());
-
         query.setPassword(passwordEncoder.encode(query.getPassword()));
         sysManagerService.changePassword(query);
         return Result.ok();
@@ -119,4 +116,3 @@ public class SysManagerController {
 
 
 }
-

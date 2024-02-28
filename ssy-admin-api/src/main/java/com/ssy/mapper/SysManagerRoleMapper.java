@@ -1,15 +1,15 @@
 package com.ssy.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ssy.entity.SysManagerRole;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * Mapper 接口
+ * 用户角色关系 Mapper 接口
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 public interface SysManagerRoleMapper extends BaseMapper<SysManagerRole> {
 

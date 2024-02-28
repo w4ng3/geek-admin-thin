@@ -1,8 +1,6 @@
 package com.ssy.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,40 +8,51 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *
+ * 用户角色关系
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Getter
 @Setter
 @TableName("sys_manager_role")
-@ApiModel(value = "ManagerRole对象", description = "")
 public class SysManagerRole {
 
-	@ApiModelProperty("自增主键")
-	@TableId(value = "pk_id", type = IdType.AUTO)
-	private Integer pkId;
+    /**
+     * id
+     */
+    @TableId(value = "pk_id", type = IdType.AUTO)
+    private Integer pkId;
 
-	@ApiModelProperty("管理员id")
-	@TableField("manager_id")
-	private Integer managerId;
+    /**
+     * 角色ID
+     */
+    @TableField("role_id")
+    private Integer roleId;
 
-	@ApiModelProperty("角色id")
-	@TableField("role_id")
-	private Integer roleId;
+    /**
+     * 用户ID
+     */
+    @TableField("manager_id")
+    private Integer managerId;
 
-	@ApiModelProperty("逻辑删除(0-未删除，1-删除)")
-	@TableField("delete_flag")
-	@TableLogic
-	private Integer deleteFlag;
+    /**
+     * 删除标识  0：正常   1：已删除
+     */
+    @TableField(value = "delete_flag", fill = FieldFill.INSERT)
+    @TableLogic
+    private Integer deleteFlag;
 
-	@ApiModelProperty("创建时间")
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
-	@ApiModelProperty("更新时间")
-	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	private LocalDateTime updateTime;
+    /**
+     * 更新时间
+     */
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 }

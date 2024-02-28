@@ -12,24 +12,57 @@ import java.util.List;
 
 /**
  * <p>
- * 服务类
+ * 用户管理 服务类
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 public interface SysManagerService extends IService<SysManager> {
 
-	PageResult<SysManagerVO> page(SysManagerQuery query);
+    /**
+     * 管理员列表
+     *
+     * @param query
+     * @return
+     */
+    PageResult<SysManagerVO> page(SysManagerQuery query);
 
-	void save(SysManagerVO vo);
+    /**
+     * 新增管理员
+     *
+     * @param vo
+     */
+    void save(SysManagerVO vo);
 
-	void update(SysManagerVO vo);
+    /**
+     * 修改管理员信息
+     *
+     * @param vo
+     */
+    void update(SysManagerVO vo);
 
-	void delete(List<Integer> idList);
+    /**
+     * 删除管理员信息
+     *
+     * @param idList
+     */
+    void delete(List<Integer> idList);
 
-	void changePassword(ChangePasswordQuery query);
+    /**
+     * 修改密码
+     *
+     * @param query
+     */
 
-	SysManagerVO getManagerInfo(ManagerDetail manage);
+    void changePassword(ChangePasswordQuery query);
 
+    /**
+     * 获取管理员信息
+     *
+     * @param manage
+     * @return
+     */
+
+    SysManagerVO getManagerInfo(ManagerDetail manage);
 }

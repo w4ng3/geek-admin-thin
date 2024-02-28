@@ -1,10 +1,8 @@
 package com.ssy.service.impl;
 
-import com.alibaba.excel.util.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ssy.common.constant.Constant;
 import com.ssy.common.exception.ServerException;
+import com.ssy.common.model.BaseServiceImpl;
 import com.ssy.common.result.PageResult;
 import com.ssy.convert.SysManagerConvert;
 import com.ssy.entity.SysManager;
@@ -24,17 +22,17 @@ import java.util.List;
 
 /**
  * <p>
- * 服务实现类
+ * 用户管理 服务实现类
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 @Service
 @AllArgsConstructor
-public class SysManagerServiceImpl extends ServiceImpl<SysManagerMapper, SysManager> implements SysManagerService {
+public class SysManagerServiceImpl extends BaseServiceImpl<SysManagerMapper, SysManager> implements SysManagerService {
 
-    private final SysManagerRoleService sysManagerRoleService;
+    private SysManagerRoleService sysManagerRoleService;
 
     @Override
     public PageResult<SysManagerVO> page(SysManagerQuery query) {
@@ -53,9 +51,6 @@ public class SysManagerServiceImpl extends ServiceImpl<SysManagerMapper, SysMana
         SysManager manager = baseMapper.getByUsername(entity.getUsername());
         if (manager != null) {
             throw new ServerException("用户名已经存在");
-        }
-        if (StringUtils.isBlank(vo.getAvatar())) {
-            entity.setAvatar(Constant.DEFAULT_AVATAR);
         }
         // 保存用户
         baseMapper.insert(entity);
@@ -90,6 +85,7 @@ public class SysManagerServiceImpl extends ServiceImpl<SysManagerMapper, SysMana
     @Override
     public SysManagerVO getManagerInfo(ManagerDetail manage) {
         SysManagerVO sysManagerVO = new SysManagerVO();
+        System.out.println(">>>>>>getInfo" + manage.getPkId());
         SysManager sysManager = baseMapper.selectById(manage.getPkId());
         if (sysManager == null) {
             throw new ServerException("管理员不存在");
@@ -97,7 +93,6 @@ public class SysManagerServiceImpl extends ServiceImpl<SysManagerMapper, SysMana
         sysManagerVO.setPkId(sysManager.getPkId());
         sysManagerVO.setAvatar(sysManager.getAvatar());
         sysManagerVO.setUsername(sysManager.getUsername());
-        sysManagerVO.setRealName(sysManager.getRealName());
         sysManagerVO.setStatus(sysManager.getStatus());
         sysManagerVO.setRoleId(sysManagerRoleService.getByManagerId(manage.getPkId()).getRoleId());
         sysManagerVO.setCreateTime(sysManager.getCreateTime());

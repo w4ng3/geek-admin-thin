@@ -1,5 +1,6 @@
 package com.ssy.query;
 
+
 import com.ssy.common.model.Query;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

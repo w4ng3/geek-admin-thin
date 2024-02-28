@@ -1,25 +1,23 @@
 package com.ssy.service;
 
+
 import com.ssy.vo.SysCaptchaVO;
 
 /**
- * @Author ycshang
- * @Date 2023/7/11
- * @Description TODO
+ * 验证码
  */
 public interface SysCaptchaService {
-	/**
-	 * 生成验证码
-	 */
-	SysCaptchaVO generate();
+    /**
+     * 生成验证码
+     */
+    SysCaptchaVO generate();
 
-
-	/**
-	 * 验证码校验
-	 *
-	 * @param key
-	 * @param code 验证码
-	 * @return true:校验成功 false:校验失败
-	 */
-	boolean validate(String key, String code);
+    /**
+     * 验证码效验
+     *
+     * @param key  key
+     * @param code 验证码
+     * @return true：成功  false：失败
+     */
+    boolean validate(String key, String code);
 }

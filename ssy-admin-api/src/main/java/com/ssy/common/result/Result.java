@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Data
 @Schema(description = "响应数据")

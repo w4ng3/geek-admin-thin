@@ -4,11 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ssy.entity.SysManagerRole">
-        <id column="pk_id" property="pkId"/>
-        <result column="manager_id" property="managerId"/>
-        <result column="role_id" property="roleId"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+        <id column="pk_id" property="pkId" />
+        <result column="role_id" property="roleId" />
+        <result column="manager_id" property="managerId" />
+        <result column="delete_flag" property="delete_flag" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
 </mapper>

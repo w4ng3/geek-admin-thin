@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 /**
- * @author 王子凡
+ * @author ycshang
  */
 public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

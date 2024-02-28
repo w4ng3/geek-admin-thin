@@ -12,14 +12,14 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Data
 @Schema(description = "管理员")
 public class SysManagerVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "pkId")
+    @Schema(description = "pk_id")
     private Integer pkId;
 
     @Schema(description = "用户名", required = true)
@@ -30,9 +30,6 @@ public class SysManagerVO implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Schema(description = "姓名", required = true)
-    @NotBlank(message = "姓名不能为空")
-    private String realName;
 
     @Schema(description = "头像")
     private String avatar;

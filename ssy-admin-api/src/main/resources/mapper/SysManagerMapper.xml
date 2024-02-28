@@ -7,19 +7,16 @@
         <id column="pk_id" property="pkId"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
-        <result column="real_name" property="realName"/>
         <result column="avatar" property="avatar"/>
         <result column="super_admin" property="superAdmin"/>
         <result column="status" property="status"/>
+        <result column="delete_flag" property="delete_flag"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
-
     <select id="getManagerPage" resultType="com.ssy.vo.SysManagerVO">
-        select
-        sm.*,smr.role_id
-        as roleId from sys_manager sm
-        inner join sys_manager_role smr on sm.pk_id = smr.manager_id and smr.delete_flag = 0
+        select sm.*,smr.role_id as roleId from sys_manager sm
+        left join sys_manager_role smr on sm.pk_id = smr.manager_id and smr.delete_flag = 0
         where sm.delete_flag = 0
         <if test="query.username != null and query.username != ''  ">
             and sm.username like concat('%',#{query.username},'%')

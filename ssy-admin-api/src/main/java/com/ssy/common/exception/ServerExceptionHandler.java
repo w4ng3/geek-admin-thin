@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Slf4j
 @RestControllerAdvice
@@ -36,7 +36,7 @@ public class ServerExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public Result<String> handleAccessDeniedException(Exception ex) {
-        log.error(ex.getMessage(), ex);
+
         return Result.error(ErrorCode.FORBIDDEN);
     }
 

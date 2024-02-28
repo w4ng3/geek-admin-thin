@@ -14,12 +14,12 @@
     </resultMap>
 
     <select id="getPage" resultType="com.ssy.entity.Dict">
-        select dict.* from sys_dict dict
-        where dict.delete_flag = 0
+        select * from sys_dict
+        where delete_flag = 0
         <if test="query.title != null and query.title != ''  ">
-            and dict.title like concat('%',#{query.title},'%')
+            and title like concat('%',#{query.title},'%')
         </if>
-        order by dict.create_time desc
+        order by create_time desc
     </select>
 
 </mapper>

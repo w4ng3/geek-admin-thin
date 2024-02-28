@@ -18,14 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author ycshang
- * @since 2023-11-13
- */
 @Api(tags = "字典管理")
 @RestController
 @RequestMapping("dict")

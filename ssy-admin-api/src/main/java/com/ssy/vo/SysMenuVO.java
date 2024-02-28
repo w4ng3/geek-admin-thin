@@ -1,9 +1,7 @@
 package com.ssy.vo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ssy.common.model.TreeNode;
-import com.ssy.serializer.MenuSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,9 +19,6 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "菜单")
 public class SysMenuVO extends TreeNode<SysMenuVO> {
-
-    @Schema(description = "主键ID")
-    private Integer pkId;
 
     @Schema(description = "菜单名称")
     @NotBlank(message = "菜单名称不能为空")
@@ -55,9 +50,7 @@ public class SysMenuVO extends TreeNode<SysMenuVO> {
     private String auth;
 
     @Schema(description = "是否缓存 0:true 1:false")
-    @JsonSerialize(using = MenuSerializer.class)
-    private Integer keepalive;
-
+    private Integer keepAlive;
 
     @Schema(description = "排序")
     @Min(value = 0, message = "排序值不能小于0")
@@ -66,9 +59,5 @@ public class SysMenuVO extends TreeNode<SysMenuVO> {
     @Schema(description = "父级菜单名称")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String parentName;
-
-    @Schema(description = "是否隐藏 0:true 1:false")
-    @JsonSerialize(using = MenuSerializer.class)
-    private Integer hide;
 
 }

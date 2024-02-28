@@ -2,22 +2,15 @@ spring:
   application:
     name: ssy-admin-api
   profiles:
-    active: @spring.profiles.active@
+    active: dev
   mvc:
     path-match:
       matching-strategy: ant_path_matcher #解决
-  jpa:
-    show-sql: true
-  thymeleaf:
-    prefix: classpath:/templates/
-    servlet:
-      content-type: text/html     # 模板类型
-    cache: true
 
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: com.common.*.entity
+  type-aliases-package: com.ssy.*.entity
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
@@ -60,10 +53,10 @@ auth:
 aliyun:
   oss:
     # oss对外服务的访问域名
-    endpoint: oss-cn-hangzhou.aliyuncs.com
+    endpoint: oss-cn-beijing.aliyuncs.com
     # 访问身份验证中用到用户标识
-    accessKeyId: LTA***
+    accessKeyId: LTAI5tHzb3H8Co5PgV6tp3xh
     # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-    accessKeySecret: 9dMhgTOSI***
+    accessKeySecret: lK7K1wCpX8YNHo98EkG0HlLER426Ez
     # oss的存储空间
-    bucketName: upload
+    bucketName: nlgl-shop-api

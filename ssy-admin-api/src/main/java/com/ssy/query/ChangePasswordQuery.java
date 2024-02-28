@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
+
 @Data
 @Schema(description = "修改管理员密码")
 public class ChangePasswordQuery {

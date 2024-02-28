@@ -1,6 +1,6 @@
 package com.ssy.common.config;
 
-import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author 王子凡
+ * @author ycshang
  * @date 2023年5月17日 11点25分
  * Description: Redis配置
  */
@@ -48,7 +48,7 @@ public class RedisConfig {
             if (null == t) {
                 return new byte[0];
             }
-            return JSONObject.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
+            return JSON.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
         }
         @Override
         public T deserialize(byte[] bytes) throws SerializationException {
@@ -56,7 +56,7 @@ public class RedisConfig {
                 return null;
             }
             String str = new String(bytes, DEFAULT_CHARSET);
-            return JSONObject.parseObject(str,clazz);
+            return JSON.to(clazz,str);
         }
 
     }

@@ -3,7 +3,7 @@ package com.ssy.security.user;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 public class SecurityUser {
     /**

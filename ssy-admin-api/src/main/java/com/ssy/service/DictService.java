@@ -8,15 +8,8 @@ import com.ssy.query.DictQuery;
 
 import java.util.List;
 
-/**
- * <p>
- * 服务类
- * </p>
- *
- * @author ycshang
- * @since 2023-11-13
- */
 public interface DictService extends IService<Dict> {
+
     /**
      * 字典列表 -分页
      *
@@ -54,5 +47,4 @@ public interface DictService extends IService<Dict> {
      * @return
      */
     boolean existByNumber(String number);
-
 }

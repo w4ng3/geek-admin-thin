@@ -8,26 +8,19 @@
         <result column="name" property="name"/>
         <result column="remark" property="remark"/>
         <result column="create_time" property="createTime"/>
-        <collection property="menuIds" ofType="java.lang.Integer" javaType="java.util.List" select="getMenuIdById"
-                    column="pk_id">
-            <result column="menu_id"/>
+        <collection property="menuIds" ofType="java.lang.Integer"  javaType="java.util.List">
+            <result column="menuId"/>
         </collection>
     </resultMap>
 
     <select id="getRolePage" resultMap="SysRoleVOMap">
-        select sr.*
-        from sys_role sr
+        select sr.*,srm.menu_id as menuId from sys_role sr
+        left join sys_role_menu srm on sr.pk_id = srm.role_id and srm.delete_flag = 0
         where sr.delete_flag = 0
-        <if test="query.name != null and query.name != ''">
+        <if test="query.name != null and query.name != ''  ">
             and sr.name like concat('%',#{query.name},'%')
         </if>
-    </select>
-
-    <select id="getMenuIdById" resultType="Integer">
-        SELECT menu_id
-        FROM sys_role_menu
-        WHERE role_id = #{id}
-          and delete_flag = 0
+        order by sr.create_time desc
     </select>
 
 </mapper>

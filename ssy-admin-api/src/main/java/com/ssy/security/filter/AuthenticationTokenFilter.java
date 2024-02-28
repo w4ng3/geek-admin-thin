@@ -21,9 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-/**
- * @author 王子凡
- */
 @Component
 @AllArgsConstructor
 @Slf4j

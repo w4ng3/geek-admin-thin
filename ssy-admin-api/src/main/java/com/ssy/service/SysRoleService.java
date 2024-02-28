@@ -10,21 +10,20 @@ import java.util.List;
 
 /**
  * <p>
- * 服务类
+ * 角色管理 服务类
  * </p>
  *
  * @author ycshang
- * @since 2023-07-11
+ * @since 2023-05-18
  */
 public interface SysRoleService extends IService<SysRole> {
-	PageResult<SysRoleVO> page(SysRoleQuery query);
+    PageResult<SysRoleVO> page(SysRoleQuery query);
 
-	List<SysRoleVO> getList(SysRoleQuery query);
+    List<SysRoleVO> getList(SysRoleQuery query);
 
-	void save(SysRoleVO vo);
+    void save(SysRoleVO vo);
 
-	void update(SysRoleVO vo);
+    void update(SysRoleVO vo);
 
-	void delete(List<Integer> idList);
-
+    void delete(List<Integer> idList);
 }

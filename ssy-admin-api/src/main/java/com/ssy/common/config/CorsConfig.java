@@ -7,7 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 @Configuration
 public class CorsConfig {

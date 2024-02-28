@@ -3,17 +3,17 @@ package com.ssy.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fhs.trans.service.impl.DictionaryTransService;
 import com.ssy.common.exception.ServerException;
 import com.ssy.common.result.PageResult;
-import com.ssy.mapper.DictConfigMapper;
 import com.ssy.convert.DictConvert;
 import com.ssy.dto.DictRequestDTO;
 import com.ssy.entity.Dict;
-import com.ssy.mapper.DictMapper;
 import com.ssy.entity.DictConfig;
+import com.ssy.mapper.DictConfigMapper;
+import com.ssy.mapper.DictMapper;
 import com.ssy.query.DictQuery;
 import com.ssy.service.DictService;
+import com.fhs.trans.service.impl.DictionaryTransService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +22,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-/**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author ycshang
- * @since 2023-11-13
- */
 @Service
 @AllArgsConstructor
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
@@ -37,31 +29,17 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     private final DictionaryTransService dictionaryTransService;
 
     @Override
-    public PageResult<Dict> getPage(DictQuery query) {
-        Page<Dict> page = new Page<>(query.getPage(), query.getLimit());
-        List<Dict> result = baseMapper.getPage(page, query);
+    public PageResult<Dict> getPage(DictQuery dictQuery) {
+        Page<Dict> page = new Page<>(dictQuery.getPage(), dictQuery.getLimit());
+        List<Dict> result = baseMapper.getPage(page, dictQuery);
         return new PageResult<>(result, page.getTotal());
     }
 
     @Override
-    public void refreshTransCache() {
-//        异步不阻塞主线程，不会增加启动用时
-        CompletableFuture.supplyAsync(() -> {
-//           获取所有的字典项数据
-            List<DictConfig> dataList = dictConfigMapper.selectList(null);
-
-//            根据类型分组
-            Map<String, List<DictConfig>> dictTypeDataMap = dataList.stream().collect(Collectors.groupingBy(DictConfig::getDictNumber));
-            List<Dict> dicts = super.list();
-            for (Dict dictTypeEntity : dicts) {
-                if (dictTypeDataMap.containsKey(dictTypeEntity.getNumber())) {
-                    dictionaryTransService.refreshCache(dictTypeEntity.getNumber(), dictTypeDataMap.get(dictTypeEntity.getNumber())
-                            .stream().collect(Collectors.toMap(DictConfig::getValue, DictConfig::getTitle)));
-                }
-            }
-            return null;
-        });
-
+    public boolean existByNumber(String number) {
+        LambdaQueryWrapper<Dict> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Dict::getNumber, number);
+        return baseMapper.exists(wrapper);
     }
 
     @Override
@@ -123,9 +101,22 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
     @Override
-    public boolean existByNumber(String number) {
-        LambdaQueryWrapper<Dict> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Dict::getNumber, number);
-        return baseMapper.exists(queryWrapper);
+    public void refreshTransCache() {
+//        异步不阻塞主线程，不会增加启动用时
+        CompletableFuture.supplyAsync(() -> {
+//            获取所有的字典项数据
+            List<DictConfig> dataList = dictConfigMapper.selectList(null);
+
+//            根据类型分组
+            Map<String, List<DictConfig>> dictTypeDataMap = dataList.stream().collect(Collectors.groupingBy(DictConfig::getDictNumber));
+            List<Dict> dicts = super.list();
+            for (Dict dict : dicts) {
+                if (dictTypeDataMap.containsKey(dict.getNumber())) {
+                    dictionaryTransService.refreshCache(dict.getNumber(), dictTypeDataMap.get(dict.getNumber()).stream().collect(Collectors.toMap(DictConfig::getValue, DictConfig::getTitle)));
+                }
+            }
+            return null;
+        });
+
     }
 }

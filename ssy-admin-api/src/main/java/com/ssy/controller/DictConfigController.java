@@ -2,8 +2,8 @@ package com.ssy.controller;
 
 import com.ssy.common.result.Result;
 import com.ssy.dto.DictConfigRequestDTO;
+import com.ssy.entity.DictConfig;
 import com.ssy.query.DictConfigQuery;
-import com.ssy.vo.DictConfigVO;
 import com.ssy.service.DictConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,14 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author ycshang
- * @since 2023-11-13
- */
 @Api(tags = "字典配置")
 @RestController
 @RequestMapping("/dictConfig")
@@ -34,8 +26,8 @@ public class DictConfigController {
 
     @PostMapping("page")
     @Operation(summary = "字典配置列表")
-    public Result<List<DictConfigVO>> page(@RequestBody @Validated DictConfigQuery query) {
-        List<DictConfigVO> list = dictConfigService.list(query);
+    public Result<List<DictConfig>> page(@RequestBody @Validated DictConfigQuery query) {
+        List<DictConfig> list = dictConfigService.list(query);
         return Result.ok(list);
     }
 

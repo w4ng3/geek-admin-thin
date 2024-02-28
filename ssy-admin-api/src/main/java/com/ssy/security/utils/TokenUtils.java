@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author 王子凡
+ * @author ycshang
  */
 public class TokenUtils {
 
