@@ -48,7 +48,6 @@ export namespace SysManager {
   export interface ResManagerList {
     pkId: number
     username: string
-    realName: string
     avatar: string
     status: number
     createTime: string
@@ -56,7 +55,6 @@ export namespace SysManager {
   export interface ReqEditManagerParams {
     pkId?: number
     username: string
-    realName: string
     avatar: string
     status: number
     roleId: number

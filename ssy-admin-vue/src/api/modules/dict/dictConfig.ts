@@ -1,9 +1,13 @@
 import http from '@/api'
 import { COMMON_ADMIN_API } from '@/api/axios/servicePort'
-import { Dict } from '@/api/interface/index'
+import { DictConfigRes } from '@/api/interface/index'
 
-export const dictConfigList = (params: any, loading: boolean = false) => {
-  return http.post<Dict[]>(COMMON_ADMIN_API + '/dictConfig/page ', params, { headers: { loading } })
+/**
+ * @description 字典配置列表
+ * @param number 字典编号
+ */
+export const dictConfigList = (number: string) => {
+  return http.post<DictConfigRes[]>(COMMON_ADMIN_API + '/dictConfig/page ', { number }, { headers: { noLoading: true } })
 }
 
 export const dictConfigAdd = (params: any) => {

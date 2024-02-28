@@ -24,7 +24,7 @@ import Fullscreen from './components/Fullscreen.vue'
 import Avatar from './components/Avatar.vue'
 
 const appStore = useAppStoreWithOut()
-const username = computed(() => appStore.userInfo.realName)
+const username = computed(() => appStore.userInfo.username)
 </script>
 
 <style scoped lang="less">

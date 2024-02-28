@@ -82,8 +82,7 @@ const columns: ColumnProps<DictConfigRes>[] = [
   { prop: 'operation', label: '操作', fixed: 'right', width: 330 }
 ]
 const getTableList = (params: any) => {
-  let newParams = { ...params }
-  return dictConfigList(newParams)
+  return dictConfigList(params.number)
 }
 
 // 打开 drawer(新增、查看、编辑)

@@ -37,8 +37,17 @@ export type SearchProps = {
 } & Partial<Record<BreakPoint, Responsive>>
 
 export type FieldNamesProps = {
+  /**
+   * 指定 label 的 key 值，默认为 label
+   */
   label: string
+  /**
+   * 指定 value 的 key 值，默认为 value
+   */
   value: string
+  /**
+   * 指定 children 的 key 值，默认为 children
+   */
   children?: string
 }
 
@@ -56,15 +65,24 @@ export type HeaderRenderScope<T> = {
 }
 
 export interface ColumnProps<T = any> extends Partial<Omit<TableColumnCtx<T>, 'children' | 'renderCell' | 'renderHeader'>> {
-  tag?: boolean // 是否是标签展示
-  isShow?: boolean // 是否显示在表格当中
-  search?: SearchProps | undefined // 搜索项配置
-  enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（字典）
-  isFilterEnum?: boolean // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）
-  fieldNames?: FieldNamesProps // 指定 label && value && children 的 key 值
-  headerRender?: (scope: HeaderRenderScope<T>) => VNode // 自定义表头内容渲染（tsx语法）
-  render?: (scope: RenderScope<T>) => VNode | string // 自定义单元格内容渲染（tsx语法）
-  _children?: ColumnProps<T>[] // 多级表头
+  /** 是否是标签展示 */
+  tag?: boolean
+  /** 是否显示在表格当中 */
+  isShow?: boolean
+  /** 搜索项配置 */
+  search?: SearchProps | undefined
+  /** 枚举类型（字典） */
+  enum?: EnumProps[] | ((params?: any) => Promise<any>)
+  /** 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据） */
+  isFilterEnum?: boolean
+  /** 指定 label && value && children 的 key 值 */
+  fieldNames?: FieldNamesProps
+  /** 自定义表头内容渲染（tsx语法） */
+  headerRender?: (scope: HeaderRenderScope<T>) => VNode
+  /** 自定义单元格内容渲染（tsx语法） */
+  render?: (scope: RenderScope<T>) => VNode | string
+  /** 多级表头 */
+  _children?: ColumnProps<T>[]
 }
 
 export type ProTableInstance = Omit<InstanceType<typeof ProTable>, keyof ComponentPublicInstance | keyof ProTableProps>

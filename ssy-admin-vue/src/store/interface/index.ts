@@ -68,7 +68,6 @@ export interface UserinfoType {
   avatar: string
   createTime: any
   pkId: number
-  realName: string
   roleId: number
   status: number
   username: string

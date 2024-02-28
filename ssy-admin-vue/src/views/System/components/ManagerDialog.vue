@@ -13,9 +13,6 @@
         <el-form-item v-if="dialogProps.title !== '重置'" label="用户名" prop="username">
           <el-input v-model="dialogProps.row!.username" placeholder="请填写用户名（2-20字）" clearable></el-input>
         </el-form-item>
-        <el-form-item v-if="dialogProps.title !== '重置'" label="姓名" prop="realName">
-          <el-input v-model="dialogProps.row!.realName" placeholder="请填写姓名（2-10字）" clearable></el-input>
-        </el-form-item>
         <el-form-item v-if="dialogProps.title !== '重置'" label="用户头像" prop="avatar">
           <UploadImg v-model:image-url="dialogProps.row!.avatar" width="135px" height="135px" :file-size="5">
             <template #empty>
@@ -105,10 +102,6 @@ const rules = reactive({
   username: [
     { required: true, message: '用户名不能为空', trigger: 'blur' },
     { min: 2, max: 20, message: '字数为2-20个字' }
-  ],
-  realName: [
-    { required: true, message: '姓名不能为空', trigger: 'blur' },
-    { min: 2, max: 10, message: '字数为2-10个字' }
   ],
   // avatar: [{ required: true, message: '请上传用户头像' }],
   password: [

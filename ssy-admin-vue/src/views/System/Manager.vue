@@ -28,6 +28,7 @@ import ManagerDialog from '@/views/System/components/ManagerDialog.vue'
 import { CirclePlus, Delete, EditPen, View } from '@element-plus/icons-vue'
 import { getManagerPage, addManager, editManager, deleteManager } from '@/api/modules/manager'
 import { getRoleList } from '@/api/modules/role'
+
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref()
 
@@ -69,7 +70,6 @@ const columns: ColumnProps<SysManager.ResManagerList>[] = [
     label: '用户名',
     search: { el: 'input' }
   },
-  { prop: 'realName', label: '姓名' },
   {
     prop: 'roleId',
     tag: true,
